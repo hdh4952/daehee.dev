@@ -1,6 +1,7 @@
+import { Post } from '@/models/Post';
 import PostCard from './PostCard';
 
-export default function PostCardList({ posts }: {posts: Post[]}) {
+export default function PostCardList({ posts }: { posts: Post[] }) {
   return (
     <>
       {posts.map((post) => {
@@ -8,14 +9,7 @@ export default function PostCardList({ posts }: {posts: Post[]}) {
         const { title, description, date } = parsedPost.data;
 
         return (
-          <PostCard
-            key={url}
-            category={category}
-            title={title}
-            description={description}
-            date={date.toString()}
-            slug={slug}
-          />
+          <PostCard key={url} category={category} title={title} description={description} date={date} slug={slug} />
         );
       })}
     </>

@@ -1,6 +1,8 @@
 import fs from 'fs';
 import matter from 'gray-matter';
 import getPostPaths from './getPostPaths';
+import dayjs from 'dayjs';
+import { Post } from '@/models/Post';
 
 const BASE_PATH = '/src/posts';
 
@@ -13,7 +15,8 @@ const parsePost = async (postPath: string) => {
   const [category, slug] = filePath.split('/');
   const url = `/blog/${category}/${slug}`;
 
-  return { url, category, slug, parsedPost: { data: { title, description, date }, content } };
+  const formattedDate = dayjs(date).locale('ko').format('YYYY년 MM월 DD일');
+  return { url, category, slug, parsedPost: { data: { title, description, date: formattedDate }, content } };
 };
 
 const getPosts = async (category?: string): Promise<Post[]> => {

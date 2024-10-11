@@ -5,10 +5,7 @@ export const dynamicParams = false;
 
 export async function generateStaticParams() {
   const allPosts = await getPosts();
-
-  return allPosts.map(({ slug }) => {
-    slug;
-  });
+  return allPosts.map(({ category, slug }) => ({ category, slug }));
 }
 
 export default async function Page({ params }: { params: { slug: string } }) {
@@ -20,7 +17,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
     <div className="px-4">
       <div>{data.title}</div>
       <div>{data.description}</div>
-      <div>{data.date.toString()}</div>
+      <div>{data.date}</div>
       ---------------------------------
       <MDXRemote source={content} />
       <p>{content}</p>
