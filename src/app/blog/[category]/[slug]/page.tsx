@@ -14,13 +14,12 @@ export default async function Page({ params }: { params: { slug: string } }) {
   const { data, content } = post!.parsedPost;
 
   return (
-    <div className="px-4">
+    <div className="flex w-full flex-col justify-start px-4 lg:w-[1024px]">
       <div>{data.title}</div>
       <div>{data.description}</div>
       <div>{data.date}</div>
       ---------------------------------
       <MDXRemote source={content} />
-      <p>{content}</p>
     </div>
   );
 }
