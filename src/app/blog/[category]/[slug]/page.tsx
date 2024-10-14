@@ -1,5 +1,5 @@
+import Post from '@/components/mdx/Post';
 import getPosts from '@/utils/post/getPosts';
-import { MDXRemote } from 'next-mdx-remote/rsc';
 
 export const dynamicParams = false;
 
@@ -15,11 +15,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
   return (
     <div className="flex w-full flex-col justify-start px-4 lg:w-[1024px]">
-      <div>{data.title}</div>
-      <div>{data.description}</div>
-      <div>{data.date}</div>
-      ---------------------------------
-      <MDXRemote source={content} />
+      <Post {...data} content={content} />
     </div>
   );
 }
