@@ -1,4 +1,5 @@
 import PostCardList from '@/components/PostCardList';
+import PostCardNav from '@/components/PostCardNav';
 import getPosts from '@/utils/post/getPosts';
 
 export const dynamicParams = false;
@@ -20,5 +21,10 @@ export default async function Page({ params }: { params: { category: string } })
   const { category } = params;
   const posts = await getPosts(category);
 
-  return <PostCardList posts={posts} />;
+  return (
+    <>
+      <PostCardNav posts={posts} selectedCategory={category} />
+      <PostCardList posts={posts} />
+    </>
+  );
 }

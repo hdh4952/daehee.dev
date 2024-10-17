@@ -7,6 +7,11 @@ const nextConfig = {
         destination: '/blog',
         permanent: true,
       },
+      {
+        source: '/blog/all',
+        destination: '/blog',
+        permanent: true,
+      },
     ];
   },
 };
