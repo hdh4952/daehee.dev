@@ -20,7 +20,7 @@ export default function PostCardNav({ posts, selectedCategory = 'all' }: { posts
           <Link
             key={category}
             href={`/blog/${category}`}
-            className={`mr-4 rounded-lg border px-4 py-2 shadow ${selected ? 'bg-black3 text-white' : 'bg-white text-black3'}`}
+            className={`mr-4 rounded-lg border px-4 py-2 capitalize shadow ${selected ? 'bg-black3 text-white' : 'bg-white text-black3'}`}
           >
             {category} ({count})
           </Link>
