@@ -5,6 +5,8 @@ import H3 from './H3';
 import P from './P';
 import Li from './Li';
 import rehypePrettyCode from 'rehype-pretty-code';
+import Ol from './Ol';
+import Ul from './Ul';
 
 export default function Post({
   title,
@@ -26,7 +28,7 @@ export default function Post({
       </div>
       <MDXRemote
         source={content}
-        components={{ h1: H1, h2: H2, h3: H3, p: P, li: Li }}
+        components={{ h1: H1, h2: H2, h3: H3, p: P, li: Li, ul: Ul, ol: Ol }}
         options={{
           mdxOptions: {
             // rehypePlugins: [[rehypePrettyCode, { theme: 'github-light' }]],
