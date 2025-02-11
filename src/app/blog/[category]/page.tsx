@@ -23,7 +23,7 @@ export default async function Page({ params }: { params: { category: string } })
 
   return (
     <>
-      <PostCardNav posts={posts} selectedCategory={category} />
+      <PostCardNav selectedCategory={category} />
       <PostCardList posts={posts} />
     </>
   );

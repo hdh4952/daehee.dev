@@ -1,7 +1,8 @@
-import { Post } from '@/models/Post';
+import getPosts from '@/utils/post/getPosts';
 import Link from 'next/link';
 
-export default function PostCardNav({ posts, selectedCategory = 'all' }: { posts: Post[]; selectedCategory?: string }) {
+export default async function PostCardNav({ selectedCategory = 'all' }: { selectedCategory?: string }) {
+  const posts = await getPosts();
   const categoryCount = new Map<string, number>([['all', posts.length]]);
   posts.forEach(({ category }) => {
     if (!categoryCount.has(category)) {
@@ -13,7 +14,7 @@ export default function PostCardNav({ posts, selectedCategory = 'all' }: { posts
 
   return (
     <div className="mt-8 flex h-8 w-11/12 flex-wrap justify-start lg:w-[800px]">
-      {Array.from(categoryCount.entries()).map(([category, count]) => {
+      {...Array.from(categoryCount.entries()).map(([category, count]) => {
         const selected: boolean = selectedCategory === category;
 
         return (

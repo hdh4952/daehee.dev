@@ -7,7 +7,7 @@ export default async function Page() {
 
   return (
     <>
-      <PostCardNav posts={posts} />
+      <PostCardNav />
       <PostCardList posts={posts} />
     </>
   );
