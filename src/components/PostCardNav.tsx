@@ -13,7 +13,7 @@ export default async function PostCardNav({ selectedCategory = 'all' }: { select
   });
 
   return (
-    <div className="mt-8 flex h-8 w-11/12 flex-wrap justify-start lg:w-[800px]">
+    <div className="mt-8 flex h-fit w-11/12 flex-wrap justify-start lg:w-[800px]">
       {...Array.from(categoryCount.entries()).map(([category, count]) => {
         const selected: boolean = selectedCategory === category;
 
@@ -21,7 +21,7 @@ export default async function PostCardNav({ selectedCategory = 'all' }: { select
           <Link
             key={category}
             href={`/blog/${category}`}
-            className={`mr-4 rounded-lg border px-4 py-2 capitalize shadow ${selected ? 'bg-black3 text-white' : 'bg-white text-black3'}`}
+            className={`mb-2 mr-4 rounded-lg border px-4 py-2 capitalize shadow ${selected ? 'bg-black3 text-white' : 'bg-white text-black3'}`}
           >
             {category} ({count})
           </Link>
