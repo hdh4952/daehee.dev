@@ -1,0 +1,61 @@
+---
+title: Window와 Linux에서 파일 경로 구분
+description: OS마다 파일 경로 구분자가 다르기 때문에 관련 코드 작성 시 주의가 필요하다
+date: 2025-02-11
+---
+
+# 오랜만에 깃헙 블로그
+
+군대에 갇혀 알고리즘만 공부하다가 휴가를 나와서 그동안 손을 놨던 깃헙 블로그 프로젝트에 다시 관심을 가지게 됐다.
+그런데 블로그 홈페이지를 딱 들어가니 너무 밋밋해 보여 어떻게 하면 좀 예뻐 보일까 고민하다 글마다 썸네일 사진을 추가해 보기로 했다.
+하지만 클론 받아서 실행시켜 보니...
+
+## 카테고리 에러
+
+vercel로 호스팅된 블로그는 카테고리가 잘 보이는데, 로컬에서는 Javascript로 떠야 할 카테고리가 X로 떠 있었다.
+이게 뭔 일이지 싶어 블로그 데이터를 콘솔에 찍어보니 제목, 내용은 잘 나오는데 카테고리만 불러오지 못하고 있었다.
+
+# 문제 파악
+
+글을 쓰고 불러오는 과정은 다음과 같이 설계했다.
+
+1. posts 폴더 하위에 카테고리별로 폴더를 만든다.
+2. 카테고리 폴더 하위에 새 폴더를 만들고 그 안에 content.mdx라는 파일을 만들어 글을 쓴다.
+   2-1. 이때, 카테고리 안 폴더 이름은 중복되지 않게 한다.
+3. posts/... 을 기준으로 파일 경로를 이용해서 카테고리를 나누고 글을 파싱한다.
+4. 파싱된 글을 예쁘게 만들어서 보여준다.
+
+여기서 3번 차례에 파일 경로가 문제가 됐다.
+
+군대 내에서는 GCP 무료 크레딧을 이용해서 서버를 띄우고 code-server를 이용해서 개발했는데 이때 서버는 우분투였고
+집에서 다운받고 실행시킨 컴퓨터는 윈도우라서 파일 경로를 이용해 카테고리를 분류하는 과정에서 에러가 났다.
+
+## 파일 경로 구분자
+
+운영체제(OS)마다 파일 경로 구분자가 다른데, linux는 '/'를 쓰고 window는 '\'를 쓴다.
+따라서 파일 경로를 불러왔을 때
+
+linux는 **posts/javascript/hello-world/content.mdx**  
+window는 **posts\javascript\hello-world\content.mdx**
+
+이렇게 보인다.
+
+# 해결
+
+```javascript
+const BASE_PATH = '/src/posts';
+// ...
+const [category, slug] = filePath.split('/');
+```
+
+이렇게 되어있던 코드를 nodejs의 path 모듈을 사용해서 처리해 줬다.
+
+```javascript
+import path from 'path';
+const BASE_PATH = path.join('src', 'posts');
+// ...
+const [category, slug] = relativePath.split(path.sep);
+```
+
+path.normalize()는 경로를 표준화해서 OS에 맞는 형식으로 변환시켜주고
+path.sep는 현재 OS에 맞는 경로 구분자를 제공해준다.
