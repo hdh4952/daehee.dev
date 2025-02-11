@@ -31,8 +31,8 @@ export default function Post({
         components={{ h1: H1, h2: H2, h3: H3, p: P, li: Li, ul: Ul, ol: Ol }}
         options={{
           mdxOptions: {
-            // rehypePlugins: [[rehypePrettyCode, { theme: 'github-light' }]],
-            rehypePlugins: [[rehypePrettyCode, { light: 'github-light', dark: 'github-dark' }]],
+            // rehypePlugins: [[rehypePrettyCode, { light: 'github-light', dark: 'github-dark' }]],
+            rehypePlugins: [[rehypePrettyCode, { theme: 'github-dark' }]],
           },
         }}
       />
