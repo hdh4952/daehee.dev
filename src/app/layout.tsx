@@ -21,7 +21,7 @@ export default function RootLayout({
   children: ReactNode;
 }>) {
   return (
-    <html lang="ko">
+    <html lang="ko" className="overflow-y-scroll scrollbar-hide">
       <body className={`${notoSansKr.className} bg-white dark:bg-black3`}>
         <Header />
         <main className="flex w-full flex-col items-center justify-start pt-16">{children}</main>
