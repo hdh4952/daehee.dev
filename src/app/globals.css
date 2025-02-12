@@ -29,4 +29,5 @@ body {
 [data-rehype-pretty-code-figure] pre {
   border-radius: 8px;
   padding: 16px;
+  overflow-x: scroll;
 }

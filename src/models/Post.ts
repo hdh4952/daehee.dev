@@ -7,6 +7,7 @@ export interface Post {
       title: string;
       description: string;
       date: string;
+      thumbLink: string | null;
     };
     content: string;
   };

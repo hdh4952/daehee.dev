@@ -10,7 +10,7 @@ const BASE_PATH = path.join('src', 'posts');
 const parsePost = async (postPath: string) => {
   const file = fs.readFileSync(postPath, 'utf-8');
   const { data, content } = matter(file);
-  const { title, description, date } = data;
+  const { title, description, date, thumbnail } = data;
 
   const normalizedPath = path.normalize(postPath);
   const relativePath = normalizedPath
@@ -22,7 +22,13 @@ const parsePost = async (postPath: string) => {
   const url = `/blog/${category}/${slug}`;
 
   const formattedDate = dayjs(date).locale('ko').format('YYYY년 MM월 DD일');
-  return { url, category, slug, parsedPost: { data: { title, description, date: formattedDate }, content } };
+
+  let thumbLink = null;
+  if (thumbnail) {
+    thumbLink = `/images/${thumbnail}`;
+  }
+
+  return { url, category, slug, parsedPost: { data: { title, description, date: formattedDate, thumbLink }, content } };
 };
 
 const getPosts = async (category?: string): Promise<Post[]> => {

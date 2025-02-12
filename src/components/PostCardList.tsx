@@ -9,10 +9,18 @@ export default function PostCardList({ posts }: { posts: Post[] }) {
     <>
       {posts.map((post) => {
         const { url, category, slug, parsedPost } = post;
-        const { title, description, date } = parsedPost.data;
+        const { title, description, date, thumbLink } = parsedPost.data;
 
         return (
-          <PostCard key={url} category={category} title={title} description={description} date={date} slug={slug} />
+          <PostCard
+            key={url}
+            category={category}
+            title={title}
+            description={description}
+            date={date}
+            slug={slug}
+            thumbLink={thumbLink}
+          />
         );
       })}
     </>
